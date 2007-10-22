@@ -5,6 +5,7 @@
 %define api 0
 %define major 4
 %define libname %mklibname %oname %{api}_%major
+%define develname %mklibname -d %oname %api
 
 Summary: Set of document centric objects and utilities for glib/gtk
 Name: %{name}
@@ -41,15 +42,16 @@ Requires: %name >= %version
 %description -n %libname
 Shared library implementing document centric objects and utilities for glib/gtk
 
-%package -n %libname-devel
+%package -n %develname
 Summary:  %{summary}
 Group: Development/C
 Requires: %libname = %version
 Provides: %name-devel = %version-%release
 Provides: lib%name-devel = %version-%release
 Conflicts: %mklibname -d goffice 0_3
+Obsoletes: %mklibname -d goffice 0_4
 
-%description -n %libname-devel
+%description -n %develname
 Development files of the Goffice library.
 
 %prep
@@ -83,7 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %_libdir/libgoffice-%api.so.%{major}*
 %_libdir/%oname/%version/
 
-%files -n %libname-devel
+%files -n %develname
 %defattr(-,root,root)
 %_includedir/libgoffice-0.4/
 %_libdir/lib*.so
