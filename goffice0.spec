@@ -15,7 +15,6 @@ Source0: http://ftp.gnome.org/pub/GNOME/sources/goffice/%{oname}-%{version}.tar.
 License: GPL
 Group: System/Libraries
 Url: http://www.gnome.org
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	automake1.8
 BuildRequires:	intltool
 BuildRequires: gtk+2-devel
