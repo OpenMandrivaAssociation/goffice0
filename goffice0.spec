@@ -10,18 +10,21 @@
 Summary: Set of document centric objects and utilities for glib/gtk
 Name: %{name}
 Version: %{version}
-Release: %mkrel 4
+Release: %mkrel 5
 Source0: http://ftp.gnome.org/pub/GNOME/sources/goffice/%{oname}-%{version}.tar.bz2
 License: GPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	automake1.8
+BuildRequires:	automake
 BuildRequires:	intltool
 BuildRequires: gtk+2-devel
 BuildRequires: libgnomeprint-devel >= 2.8.2
 BuildRequires: libgsf-devel >= 1:1.13.3
 BuildRequires: libglade2.0-devel
+BuildRequires: libgnomeui2-devel
+BuildRequires: libGConf2-devel
+BuildRequires: libgsf-devel
 BuildRequires: pcre libpcre-devel
 BuildRequires: gtk-doc
 BuildRequires: perl-XML-Parser
