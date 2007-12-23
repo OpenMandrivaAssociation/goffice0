@@ -10,9 +10,9 @@
 Summary: Set of document centric objects and utilities for glib/gtk
 Name: %{name}
 Version: %{version}
-Release: %mkrel 3
+Release: %mkrel 4
 Source0: http://ftp.gnome.org/pub/GNOME/sources/goffice/%{oname}-%{version}.tar.bz2
-License: GPL
+License: GPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -58,7 +58,7 @@ Development files of the Goffice library.
 %setup -q -n %oname-%version
 
 %build
-%configure2_5x --enable-gtk-doc
+%configure2_5x --enable-gtk-doc --with-gnome
 %make
 
 %install
