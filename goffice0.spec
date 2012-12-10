@@ -1,33 +1,31 @@
 %define name goffice0
 %define oname goffice
-%define version 0.4.3
+%define version 0.9.6
 
-%define api 0
-%define major 4
+%define api 0.10
+%define major 9
 %define libname %mklibname %oname %{api}_%major
 %define develname %mklibname -d %oname %api
 
 Summary: Set of document centric objects and utilities for glib/gtk
 Name: %{name}
 Version: %{version}
-Release: %mkrel 9
-Source0: http://ftp.gnome.org/pub/GNOME/sources/goffice/%{oname}-%{version}.tar.bz2
+Release: %mkrel 8
+Source0: http://ftp.gnome.org/pub/GNOME/sources/goffice/%{oname}-%{version}.tar.xz
 License: GPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	automake
 BuildRequires:	intltool
-BuildRequires: gtk+2-devel
-BuildRequires: libgnomeprint-devel >= 2.8.2
-BuildRequires: libgsf-devel >= 1:1.13.3
-BuildRequires: libglade2.0-devel
-BuildRequires: libgnomeui2-devel
-BuildRequires: libGConf2-devel
-BuildRequires: libgsf-devel
-BuildRequires: pcre libpcre-devel
-BuildRequires: gtk-doc
+BuildRequires: pkgconfig(gtk+-3.0)
+BuildRequires: pkgconfig(libgnomeprint-2.2)
+BuildRequires: pkgconfig(libglade-2.0)
+BuildRequires: pkgconfig(libgnomeui-2.0)
+BuildRequires: pkgconfig(gconf-2.0)
+BuildRequires: pkgconfig(libgsf-1)
+BuildRequires: pcre pkgconfig(libpcre)
 BuildRequires: perl-XML-Parser
+BuildRequires: pkgconfig(librsvg-2.0)
 Obsoletes: %oname <= 0.4.3
 
 %description
@@ -61,41 +59,88 @@ Development files of the Goffice library.
 %setup -q -n %oname-%version
 
 %build
-%configure2_5x --enable-gtk-doc --with-gnome
+%configure2_5x
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT %name-%version.lang
 %makeinstall_std
 %find_lang %oname-%version
-find %buildroot -name \*.la|xargs chmod 644
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
 
 %files -f %oname-%version.lang
-%defattr(-,root,root)
 %doc README NEWS AUTHORS BUGS MAINTAINERS
-%_datadir/%oname
-%_datadir/pixmaps/%oname
 %dir %_libdir/%oname/
 
 %files -n %libname
-%defattr(-,root,root)
 %_libdir/libgoffice-%api.so.%{major}*
 %_libdir/%oname/%version/
 
 %files -n %develname
-%defattr(-,root,root)
-%_includedir/libgoffice-0.4/
+%_includedir/libgoffice-%{api}
 %_libdir/lib*.so
-%attr(644,root,root) %_libdir/lib*a
 %_libdir/pkgconfig/*.pc
-%_datadir/gtk-doc/html/goffice/
+%_datadir/gtk-doc/html/goffice-%{api}
+
+
+%changelog
+* Sat Nov 08 2008 Funda Wang <fundawang@mandriva.org> 0.4.3-8mdv2009.1
++ Revision: 301129
+- rebuild for new xcb
+
+* Thu Jul 24 2008 Thierry Vignaud <tvignaud@mandriva.com> 0.4.3-7mdv2009.0
++ Revision: 246516
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Sun Dec 23 2007 Funda Wang <fundawang@mandriva.org> 0.4.3-5mdv2008.1
++ Revision: 137265
+- add missing BR
+
+* Sun Dec 23 2007 Funda Wang <fundawang@mandriva.org> 0.4.3-4mdv2008.1
++ Revision: 137250
+- Enable gnome extension
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tvignaud@mandriva.com>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Mon Oct 22 2007 Götz Waschk <waschk@mandriva.org> 0.4.3-3mdv2008.1
++ Revision: 101085
+- new devel name
+
+* Fri Sep 07 2007 Götz Waschk <waschk@mandriva.org> 0.4.3-3mdv2008.0
++ Revision: 81432
+- fix deps
+
+* Tue Sep 04 2007 Götz Waschk <waschk@mandriva.org> 0.4.3-2mdv2008.0
++ Revision: 79319
+- rename the package
+- copy goffice to goffice0
+
+* Tue Sep 04 2007 Götz Waschk <waschk@mandriva.org> 0.4.3-1mdv2008.0
++ Revision: 79228
+- new version
+- fix build
+
+* Tue Jul 24 2007 Götz Waschk <waschk@mandriva.org> 0.4.2-1mdv2008.0
++ Revision: 54976
+- new version
+
+* Wed Jul 11 2007 Götz Waschk <waschk@mandriva.org> 0.4.1-1mdv2008.0
++ Revision: 51223
+- new version
+- drop merged patch
+- add conflict with old devel package for upgrades
+
+* Fri May 04 2007 Götz Waschk <waschk@mandriva.org> 0.4.0-1mdv2008.0
++ Revision: 22231
+- new version
+- new major
+
+* Sun Apr 22 2007 Götz Waschk <waschk@mandriva.org> 0.3.8-1mdv2008.0
++ Revision: 16891
+- new version
+
