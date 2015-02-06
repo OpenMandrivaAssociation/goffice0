@@ -10,7 +10,7 @@
 Summary: Set of document centric objects and utilities for glib/gtk
 Name: %{name}
 Version: %{version}
-Release: %mkrel 8
+Release: 9
 Source0: http://ftp.gnome.org/pub/GNOME/sources/goffice/%{oname}-%{version}.tar.xz
 License: GPLv2+
 Group: System/Libraries
