@@ -14,7 +14,7 @@ Release: 9
 Source0: http://ftp.gnome.org/pub/GNOME/sources/goffice/%{oname}-%{version}.tar.xz
 License: GPLv2+
 Group: System/Libraries
-Url: http://www.gnome.org
+Url: https://www.gnome.org
 BuildRequires:	automake
 BuildRequires:	intltool
 BuildRequires: pkgconfig(gtk+-3.0)
